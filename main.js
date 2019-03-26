@@ -1,25 +1,27 @@
 //console.log(document.body)
+if(document.body.getElementsByTagName("frame").length>2){
 document.body.getElementsByTagName("frame")[2].onload = function(){
     //console.log("a");
-    target = body.document.body;
+    var target = body.document.body;
     //target.innerHTML = target.innerHTML.split('秀').join('禿');
     if(!target.innerHTML.includes("GPA計算年度・学期")){
         console.log("not");
         return;
     }
-    tr = target.getElementsByTagName("tr");
-    numf = 0;
-    gpsum = 0;
-    creditsum = 0;
-    nocalccredit = 0;
-    for(var i = 6;i<=tr.length-27;++i){
+    var tr = target.getElementsByTagName("tr");
+    var numf = 0;
+    var gpsum = 0;
+    var creditsum = 0;
+    var nocalccredit = 0;
+    for(var i = 6;i<=tr.length;++i){
         elem = tr[i].getElementsByTagName("td");
         //0 No. ,6 単位数 ,9 標語,10 合否
+        if(elem.length==0)break;
         elem[0].innerHTML = String(parseInt(elem[0].innerHTML)-numf);
         creditsum+=parseInt(elem[6].innerHTML);
         if(elem[9].innerHTML.includes('秀')){
             gpsum+=parseInt(elem[6].innerHTML)*4;
-            elem[9].innerHTML="禿"
+           // elem[9].innerHTML="禿"
         }else if(elem[9].innerHTML.includes('優')){
             gpsum+=parseInt(elem[6].innerHTML)*3;
         }else if(elem[9].innerHTML.includes('良')){
@@ -33,8 +35,8 @@ document.body.getElementsByTagName("frame")[2].onload = function(){
             i--;
             continue;
         }else{
-            creditsum-=parseInt(elem[6].innerHTML);
-            //nocalccredit+=parseInt(elem[6].innerHTML);
+            //creditsum-=parseInt(elem[6].innerHTML);
+            nocalccredit+=parseInt(elem[6].innerHTML);
         }
     }
     tr[3].getElementsByTagName("td")[1].innerHTML=String(creditsum.toFixed(1));
@@ -60,4 +62,5 @@ document.body.getElementsByTagName("frame")[2].onload = function(){
             i-=10;
         }
     }*/
+}
 }
