@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "UEC_GPAfilter",
+    "description": "不可の単位を見えなくし、GPAを再計算します。",
+    "version": "1.0",
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "content_scripts": [
+    {
+      "matches": [
+          "https://campusweb.office.uec.ac.jp/*"
+      ],
+      "css": ["contents_style.css"],
+      "js": ["main.js"]
+    }],  
+    "permissions": [
+        "tabs",
+        "https://*/*",
+        "http://*/*",
+        "storage"
+    ]
+}
